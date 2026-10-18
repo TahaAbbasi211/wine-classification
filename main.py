@@ -2,29 +2,48 @@
 # 1. Import Libraries
 # ==========================
 
-from sklearn.datasets import load_wine
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix
+)
+
 # ==========================
 # 2. Load Dataset
 # ==========================
-wine = load_wine()
 
 # Convert features into a DataFrame
-df = pd.DataFrame(
-    wine.data,
-    columns=wine.feature_names
-)
+def load_data():
+    """Load the Wine dataset and return features and target."""
 
-# Add the target column
-df["target"] = wine.target
+    wine = load_wine()
 
-# Inspect the dataset
-print("Dataset shape:", df.shape)
-print("Missing values:", df.isnull().sum().sum())
-print("Class names:", wine.target_names)
+    X = pd.DataFrame(
+        wine.data,
+        columns=wine.feature_names
+    )
+
+    y = pd.Series(wine.target, name="target")
+
+    print("Dataset shape:", X.shape)
+    print("Target classes:", wine.target_names)
+
+    return X, y
 
 # ==========================
 # 3. Explore Data
@@ -106,8 +125,6 @@ print("Number of classes:", y.nunique())
 # 9. Train/Test Split
 # ==========================
 
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -122,10 +139,6 @@ print("Testing samples:", len(X_test))
 # ==========================
 # 10. Train the Model
 # ==========================
-
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
 
 model = make_pipeline(
     StandardScaler(),
@@ -149,8 +162,6 @@ print("Predicted classes: ", y_pred[:10].tolist())
 # 12. Evaluate the Model
 # ==========================
 
-from sklearn.metrics import accuracy_score
-
 accuracy = accuracy_score(y_test, y_pred)
 
 print("Accuracy:", round(accuracy, 4))
@@ -159,14 +170,6 @@ print("Accuracy percentage:", round(accuracy * 100, 2), "%")
 # ==========================
 # 13. Compare Models
 # ==========================
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
 
 models = {
     "Logistic Regression": make_pipeline(
