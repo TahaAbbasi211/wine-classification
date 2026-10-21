@@ -1,65 +1,61 @@
 # Wine Classification
 
 ## Overview
-
-This project explores a wine classification problem
-using Python and machine learning.
-
-The goal is to predict the wine class from numerical
-features describing the samples.
+A machine learning project that classifies wine samples into three classes using chemical properties.
 
 ## Dataset
+The project uses the Wine dataset provided by scikit-learn.
 
-The dataset is provided by scikit-learn through
-`sklearn.datasets.load_wine`.
-
-It contains 178 samples, 13 numerical features,
-and 3 target classes.
-
-## Tools and Libraries
-
-- Python
-- Pandas
-- Matplotlib
-- Seaborn
-- Scikit-learn
-
-## Project Workflow
-
-1. Load and inspect the dataset.
-2. Perform exploratory data analysis (EDA).
-3. Visualize feature distributions and relationships.
-4. Split the data into training and testing sets.
-5. Train multiple classification models.
-6. Evaluate and compare model performance.
+- 178 samples
+- 13 numerical features
+- 3 target classes
 
 ## Models
+The following classification algorithms are compared:
 
 - Logistic Regression
 - K-Nearest Neighbors (KNN)
 - Decision Tree
 - Random Forest
 
+## Technologies
+- Python
+- Pandas
+- Matplotlib
+- Seaborn
+- Scikit-learn
+
 ## Evaluation
+Models are evaluated using:
 
-Models are evaluated using accuracy, confusion
-matrices, precision, recall, and F1-score.
+- Accuracy
+- Precision
+- Recall
+- F1-score
 
-Actual results should be added after running the
-complete evaluation workflow.
+The evaluation results are saved to `model_results.csv`.
 
-## How to Run
+## Installation
 
-Install the required libraries:
+Install the required dependencies:
 
-    python -m pip install pandas matplotlib seaborn scikit-learn
+```bash
+python -m pip install -r requirements.txt
+```
 
-Run the project:
+## Run the Project
 
-    python main.py
+```bash
+python main.py
+```
+
+## Project Structure
+
+- `main.py`: Data processing, model training, and evaluation
+- `requirements.txt`: Project dependencies
+- `model_results.csv`: Model comparison results
+- `.gitignore`: Files excluded from Git
 
 ## Limitations
 
-This is an educational classification project.
-Performance on this dataset does not guarantee
-similar performance on other datasets.
+This is an educational project using a built-in dataset. Model performance may vary depending on the train-test split and model configuration.
