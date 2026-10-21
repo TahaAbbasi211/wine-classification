@@ -16,10 +16,12 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
     classification_report,
     confusion_matrix,
 )
-
 
 def load_data():
     """Load the Wine dataset and return features, target, and class names."""
@@ -56,6 +58,34 @@ def explore_data(X, y):
     print(y.value_counts().sort_index())
 
     return df
+
+# ==========================
+#  Build Models
+# ==========================
+
+def build_models():
+    models = {
+        "Logistic Regression": make_pipeline(
+            StandardScaler(),
+            LogisticRegression(max_iter=2000)
+        ),
+
+        "KNN": make_pipeline(
+            StandardScaler(),
+            KNeighborsClassifier(n_neighbors=5)
+        ),
+
+        "Decision Tree": DecisionTreeClassifier(
+            random_state=42
+        ),
+
+        "Random Forest": RandomForestClassifier(
+            n_estimators=100,
+            random_state=42
+        )
+    }
+
+    return models
 
 # ==========================
 #  Visualize Data
@@ -129,6 +159,9 @@ def build_models():
         ),
     }
 
+# ==========================
+# 5. Evaluate Models
+# ==========================
 
 def evaluate_models(models, X_train, X_test, y_train, y_test, target_names):
     """Train and compare models, then report the top model's test results."""
