@@ -1,61 +1,50 @@
 # Wine Classification
 
-## Overview
-A machine learning project that classifies wine samples into three classes using chemical properties.
+A machine learning project that classifies wine samples into three classes (cultivars) from 13 chemical properties, comparing four classifiers.
 
 ## Dataset
-The project uses the Wine dataset provided by scikit-learn.
+
+The Wine dataset from scikit-learn (`load_wine`, originally from the UCI Machine Learning Repository):
 
 - 178 samples
-- 13 numerical features
+- 13 numerical features (chemical properties such as alcohol, magnesium, flavanoids and color intensity)
 - 3 target classes
 
-## Models
-The following classification algorithms are compared:
+## Method
 
-- Logistic Regression
-- K-Nearest Neighbors (KNN)
-- Decision Tree
-- Random Forest
+- Stratified train/test split: 75% train, 25% test (`random_state=42`)
+- Pipelines with `StandardScaler` for Logistic Regression and KNN; the tree models need no scaling
+- Models compared: Logistic Regression, K-Nearest Neighbors (k=5), Decision Tree, Random Forest (100 trees)
+- Evaluation: accuracy comparison across models, plus a classification report and confusion matrix for the best model
+- Exploratory plots: class counts, alcohol vs color intensity, feature correlation heatmap
 
 ## Technologies
+
 - Python
-- Pandas
-- Matplotlib
-- Seaborn
+- Pandas, Matplotlib, Seaborn
 - Scikit-learn
 
-## Evaluation
-Models are evaluated using:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-
-The evaluation results are saved to `model_results.csv`.
-
 ## Installation
-
-Install the required dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## Run the Project
+## Run the project
 
 ```bash
 python main.py
 ```
 
-## Project Structure
+`main.py` prints the dataset summary, trains and compares the models, and shows the plots.
 
-- `main.py`: Data processing, model training, and evaluation
-- `requirements.txt`: Project dependencies
-- `model_results.csv`: Model comparison results
-- `.gitignore`: Files excluded from Git
+## Project structure
+
+- `main.py` — data loading, exploration, model training and evaluation
+- `Jupiter.ipynb` — exploratory notebook
+- `requirements.txt` — project dependencies
+- `.gitignore` — files excluded from Git
 
 ## Limitations
 
-This is an educational project using a built-in dataset. Model performance may vary depending on the train-test split and model configuration.
+An educational project on a small, clean, built-in dataset. Results depend on the train/test split, and picking the best model on the test set is optimistic — cross-validation would be the more rigorous choice for comparing models.
